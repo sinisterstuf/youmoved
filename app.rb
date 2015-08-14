@@ -43,7 +43,7 @@ get '/' do
             text = "you haven't Yo'd in the last 24 hours"
         else
             logger.info "has 'current' & 'last'; calculating distance!"
-            text = calculate_distance current last
+            text = calculate_distance current, last
         end
         
         # save current location
