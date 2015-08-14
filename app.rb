@@ -20,11 +20,10 @@ postdata = { api_token: ENV['YO_KEY'] }
 get '/' do
 
     logger.info "got request"
-    logger.info "#{ENV['RUN_MODE']} mode"
-    logger.info "only Yo to #{ENV['TEST_USER']}" if ENV['RUN_MODE'] == 'TEST'
 
     if params.key?('username')
         user = params['username']
+        logger.info "username: #{user}"
     else
         logger.error "missing username"
         return 'failure: bad request'
@@ -32,18 +31,23 @@ get '/' do
 
     if params.key?('location')
         current = params['location']
+        logger.info "current: #{current}"
 
         # get location from redis by name
         last = redis.get(user)
+        logger.info "last: #{last}"
 
         if last.nil?
             # location in redis expired
+            logger.info "no location found in redis"
             text = "you haven't Yo'd in the last 24 hours"
         else
+            logger.info "has 'current' & 'last'; calculating distance!"
             text = calculate_distance current last
         end
     else
         # person sent a regular Yo
+        logger.info 'no location sent; responding with instructions'
         text = 'send a location @Yo to see how far you moved'
     end
 
@@ -71,6 +75,7 @@ def calculate_distance current, last
     a = Geokit::LatLng.normalize(last.split(';'))
     b = Geokit::LatLng.normalize(current.split(';'))
     distance = a.distance_to(b)
+    logger.info "calculated distance: #{distance} km"
 
     # save current location
     redis.set(user, current)
@@ -81,10 +86,13 @@ def calculate_distance current, last
     # determine scale of movement
     text =
         if distance < 0.005
+            logger.info "barely moved"
             "you've barely moved!"
         elsif distance < 1
+            logger.info "moved near"
             "#{distance*1000} m"
         else
+            logger.info "moved far"
             "#{distance} km"
         end
 end
