@@ -75,7 +75,7 @@ get '/' do
 
 end
 
-def calculate_distance current, last
+def calculate_distance(current, last)
 
     # actual calculate distance
     a = Geokit::LatLng.normalize(last.split(';'))
