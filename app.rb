@@ -45,12 +45,12 @@ get '/' do
             logger.info "has 'current' & 'last'; calculating distance!"
             text = calculate_distance current, last
         end
-        
+
         # save current location
         redis.set(user, current)
         # clear users inactive for 24 hours
         redis.expire(user, 60*60*24)
-        
+
     else
         # person sent a regular Yo
         logger.info 'no location sent; responding with instructions'
