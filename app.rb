@@ -83,6 +83,9 @@ def calculate_distance(current, last)
     distance = a.distance_to(b)
     logger.info "calculated distance: #{distance} km"
 
+    # round to 3 significant figures
+    distance = sprintf('%.2e', distance).to_f
+
     # determine scale of movement
     text =
         if distance < 0.005
@@ -91,8 +94,12 @@ def calculate_distance(current, last)
         elsif distance < 1
             logger.info "moved near"
             "#{(distance*1000).to_i} m"
-        else
-            logger.info "moved far"
+        elsif distance < 100
+            logger.info "moved double digits"
             "#{distance} km"
+        else
+            # cast to int to remove the decimal point
+            logger.info "moved triple digits"
+            "#{distance.to_i} km"
         end
 end
