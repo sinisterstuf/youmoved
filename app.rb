@@ -90,7 +90,7 @@ def calculate_distance(current, last)
             "you've barely moved!"
         elsif distance < 1
             logger.info "moved near"
-            "#{distance*1000} m"
+            "#{(distance*1000).to_i} m"
         else
             logger.info "moved far"
             "#{distance} km"
