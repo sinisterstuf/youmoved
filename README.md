@@ -32,4 +32,5 @@ Start web app:
 
     bundle exec ruby app.rb
 
+---
 Copyright (C) 2014 Siôn le Roux (see [LICENSE.txt](LICENSE.txt) for more information)
