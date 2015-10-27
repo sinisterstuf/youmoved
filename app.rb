@@ -77,7 +77,7 @@ end
 
 get '/show' do
     logger.info "got text request: #{params['text']}"
-    return params['text']
+    return erb '<h1><%= text %></h1>', :locals => {:text => params['text']}
 end
 
 def calculate_distance(current, last)
