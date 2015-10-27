@@ -14,7 +14,7 @@ require 'geokit'
 
 # Constants
 yoapi_url  = 'https://api.justyo.co/yo'
-yotext_url = ENV['OWN_URL'] + '/show/?text='
+yotext_url = ENV['OWN_URL'] + '/show?text='
 postdata = { api_token: ENV['YO_KEY'] }
 
 get '/' do
