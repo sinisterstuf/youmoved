@@ -14,7 +14,7 @@ require 'geokit'
 
 # Constants
 yoapi_url  = 'https://api.justyo.co/yo'
-yotext_url = 'http://yotext.co/show/?text='
+yotext_url = ENV['OWN_URL'] + '/show/?text='
 postdata = { api_token: ENV['YO_KEY'] }
 
 get '/' do
@@ -73,6 +73,11 @@ get '/' do
         'failed to YoAll'
     end
 
+end
+
+get '/show' do
+    logger.info "got text request: #{params['text']}"
+    return params['text']
 end
 
 def calculate_distance(current, last)
