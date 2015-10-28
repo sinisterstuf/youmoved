@@ -12,6 +12,9 @@ redis = Redis.new(:url => ENV['REDISTOGO_URL'])
 require 'openssl'
 require 'geokit'
 
+# Get colour list
+require_relative 'colors'
+
 # Constants
 yoapi_url  = 'https://api.justyo.co/yo'
 yotext_url = ENV['OWN_URL'] + '/show?text='
@@ -77,7 +80,10 @@ end
 
 get '/show' do
     logger.info "got text request: #{params['text']}"
-    return erb :show, :locals => {:text => params['text']}
+    return erb :show, :locals => {
+        :text => params['text'],
+        :color => colors.sample
+    }
 end
 
 def calculate_distance(current, last)
