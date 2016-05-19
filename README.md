@@ -21,7 +21,7 @@ Developing
 
 Set up environment:
 
-    rvm 2.2.2
+    rvm 2.3.0
     bundle install
 
 Run tests:
