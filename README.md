@@ -1,4 +1,4 @@
-YOUMOVED [ ![Build status](http://img.shields.io/codeship/e6c959b0-265a-0133-4abc-42218616331f.svg)](https://www.codeship.io/projects/97063)
+YOUMOVED [ ![Build status](https://img.shields.io/codeship/e6c959b0-265a-0133-4abc-42218616331f.svg)](https://www.codeship.io/projects/97063)
 =========
 
 *Send location-Yo to see how far you moved*
